@@ -1,0 +1,24 @@
+{
+  "name": "komaplansys",
+  "version": "1.0.0",
+  "description": "Kelompok Lima Planning System",
+  "main": "index.js",
+  "dependencies": {
+    "buefy": "^0.8.5",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yxxa/komaplansys.git"
+  },
+  "author": "koma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yxxa/komaplansys/issues"
+  },
+  "homepage": "https://github.com/yxxa/komaplansys#readme"
+}
