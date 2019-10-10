@@ -40,6 +40,15 @@ const x = {
     methods: {
         //0: daftar | 1: login
         daftar(){
+            if(this.newNamaLengkap == null || this.newNamaLengkap == '' ||
+            this.newEmail == null || this.newEmail == '' ||
+            this.newPassword == null || this.newPassword == ''){
+                app.$buefy.toast.open({
+                    message: 'Ngisi yang bener lah babi 😡',
+                    type: 'is-danger'
+                })
+                return false
+            }
             $.ajax({
                 type: "POST",
                 url: "./assets/core/sys/action.php",
