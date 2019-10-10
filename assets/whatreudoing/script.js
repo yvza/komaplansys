@@ -59,10 +59,15 @@ const x = {
                     switch (res) {
                         case 'ok':
                             app.$buefy.toast.open({
-                                message: 'Register Berhasil, Silahkan Login Untuk Mengakses Aplikasi! 😄',
-                                duration: 3000,
+                                message: 'Register Berhasil! 😄',
                                 type: 'is-success'
                             })
+                            setTimeout(function() {
+                                app.newNamaLengkap = null
+                                app.newEmail = null
+                                app.newPassword = null
+                                $('.login-btn').click()
+                            }, 2000)
                             break;
 
                         case 'emailexist':
