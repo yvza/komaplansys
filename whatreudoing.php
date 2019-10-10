@@ -42,6 +42,7 @@
             </div>
         </div>
     </div>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/whatreudoing/script.js"></script>
 </body>
