@@ -38,7 +38,19 @@ const x = {
         
     },
     methods: {
-        
+        //0: daftar | 1: login
+        daftar(){
+            $.ajax({
+                type: "POST",
+                url: "./assets/core/sys/action.php",
+                data: "key=31337&action=0&newNamaLengkap="+app.newNamaLengkap+
+                    "&newEmail="+app.newEmail+
+                    "&newPassword="+app.newPassword,
+                success: function(res){
+                    console.log(res)
+                }
+            })
+        }
     }
 }
 
