@@ -1,5 +1,5 @@
 <?php
-require_once('./login.php');
+require_once('./connection.php');
 
 if($_POST['key'] === 31337){
     $timeRightnow = date('Y/m/d H:i:s');
