@@ -22,7 +22,7 @@
                     <a href="!#" class="box-btn">Lupa Password?</a>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="login-btn">MASUK</button>
+                    <button @click="masuk()" type="submit" class="login-btn">MASUK</button>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="signup-btn">DAFTAR</button>
+                    <button @click="daftar()" type="submit" class="signup-btn">DAFTAR</button>
                 </div>
             </div>
         </div>
