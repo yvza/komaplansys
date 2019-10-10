@@ -77,7 +77,10 @@ const x = {
             })
         },
         masuk(){
-            
+            if(this.logEmail == null || this.logEmail == '' ||
+            this.logPassword == null || this.logPassword == ''){
+                return false
+            }
         },
         lupaPassword(event){
             event.preventDefault()
