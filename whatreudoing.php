@@ -20,7 +20,7 @@
                     <div class="input-group password">
                         <input v-model="logPassword" type="password" placeholder="Password"/>
                     </div>
-                    <a href="!#" class="box-btn">Lupa Password?</a>
+                    <a @click="lupaPassword($event)" href="!#" class="box-btn">Lupa Password?</a>
                 </div>
                 <div class="card-footer">
                     <button @click="masuk()" type="submit" class="login-btn">MASUK</button>

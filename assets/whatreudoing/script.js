@@ -73,6 +73,13 @@ const x = {
         },
         masuk(){
             
+        },
+        lupaPassword(event){
+            event.preventDefault()
+            this.$buefy.toast.open({
+                message: 'Fitur ini masih di matikan lur 🤐',
+                type: 'is-light'
+            })
         }
     }
 }
