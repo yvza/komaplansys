@@ -47,7 +47,22 @@ const x = {
                     "&newEmail="+app.newEmail+
                     "&newPassword="+app.newPassword,
                 success: function(res){
-                    console.log(res)
+                    switch (res) {
+                        case 'ok':
+                            app.$buefy.toast.open({
+                                message: 'Register Berhasil, Silahkan Login Untuk Mengakses Aplikasi! 😄',
+                                duration: 3000,
+                                type: 'is-success'
+                            })
+                            break;
+
+                        case 'emailexist':
+                            app.$buefy.toast.open({
+                                message: 'Email sudah terdaftar anjay mabar slur! 👊😎',
+                                type: 'is-white'
+                            })
+                            break;
+                    }
                 }
             })
         }
