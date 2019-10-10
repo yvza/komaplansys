@@ -1,7 +1,7 @@
 <?php
 require_once('./connection.php');
 
-if($_POST['key'] === 31337){
+if($_POST['key'] == 31337){
     $timeRightnow = date('Y/m/d H:i:s');
     switch ($_POST['action']) {
         case 0:
