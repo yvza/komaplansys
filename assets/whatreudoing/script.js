@@ -1,7 +1,14 @@
 const x = {
     data() {
         return {
-            
+            //for register
+            newNamaLengkap: null,
+            newEmail: null,
+            newPassword: null,
+
+            //for login
+            logEmail: null,
+            logPassword: null
         }
     },
     created() {
