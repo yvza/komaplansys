@@ -81,6 +81,36 @@ const x = {
             this.logPassword == null || this.logPassword == ''){
                 return false
             }
+            $.ajax({
+                type: "POST",
+                url: "./assets/core/sys/action.php",
+                data: "key=31337&action=1&logEmail="+this.logEmail+
+                "&logPassword="+this.logPassword,
+                success: function(res){
+                    switch (res) {
+                        case 'valid':
+                            app.$buefy.toast.open({
+                                message: 'Berhasil Login! 😊 Redirecting...',
+                                type: 'is-success'
+                            })
+                            break;
+
+                        case 'wrong':
+                            app.$buefy.toast.open({
+                                message: 'Cek kembali inputan anda! 😃',
+                                type: 'is-light'
+                            })
+                            break;
+
+                        case 'notregistered':
+                            app.$buefy.toast.open({
+                                message: 'Email belum terdaftar! 🤣',
+                                type: 'is-info'
+                            })
+                            break;
+                    }
+                }
+            })
         },
         lupaPassword(event){
             event.preventDefault()
