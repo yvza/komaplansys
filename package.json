@@ -5,6 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "buefy": "^0.8.5",
+    "sweetalert2": "^8.18.3",
+    "tui-calendar": "^1.12.5",
     "vue": "^2.6.10"
   },
   "devDependencies": {},
