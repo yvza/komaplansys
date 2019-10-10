@@ -14,10 +14,10 @@
         <div class="card elevation-3 limit-width log-in-card below turned">
             <div class="card-body">
                 <div class="input-group email">
-                    <input type="text" placeholder="Email"/>
+                    <input v-model="logEmail" type="text" placeholder="Email"/>
                 </div>
                     <div class="input-group password">
-                        <input type="password" placeholder="Password"/>
+                        <input v-model="logPassword" type="password" placeholder="Password"/>
                     </div>
                     <a href="!#" class="box-btn">Lupa Password?</a>
                 </div>
@@ -29,13 +29,13 @@
             <div class="card elevation-2 limit-width sign-up-card above">
                 <div class="card-body">
                     <div class="input-group fullname">
-                        <input type="text" placeholder="Nama Lengkap"/>
+                        <input v-model="newNamaLengkap" type="text" placeholder="Nama Lengkap"/>
                     </div>
                     <div class="input-group email">
-                        <input type="email" placeholder="Email"/>
+                        <input v-model="newEmail" type="email" placeholder="Email"/>
                     </div>
                     <div class="input-group password">
-                        <input type="password" placeholder="Password"/>
+                        <input v-model="newPassword" type="password" placeholder="Password"/>
                     </div>
                 </div>
                 <div class="card-footer">
