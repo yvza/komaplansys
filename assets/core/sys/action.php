@@ -28,7 +28,24 @@ if(@$_POST['key'] == 31337){
             break;
 
         case 1:
-            # code...
+            $cekUserPassword = "SELECT * FROM members WHERE email = ?";
+            $ekseCekUserPassword = $pdo->prepare($cekUserPassword);
+            $ekseCekUserPassword->execute([
+                $_POST['logEmail']
+            ]);
+            $result = $ekseCekUserPassword->fetchAll();
+            $countRes = count($result);
+
+            if($countRes == 1){
+                $originPassword = $result[0]['PASSWORD'];
+                if(password_verify($_POST['logPassword'], $originPassword)){
+                    echo "valid";
+                }else{
+                    echo "wrong";
+                }
+            }else{
+                echo "notregistered";
+            }
             break;
     }
 }
