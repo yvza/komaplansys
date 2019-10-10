@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta content="koma plan sys, kolompok lima planning system" name="keywords">
+    <meta content="Adalah Aplikasi Todo-List yang dibangun dengan Vue.js dan Oracle untuk memenuhi tugas Praktek Rekayasa Perangkat Lunak" name="description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hey Whatsup!</title>
