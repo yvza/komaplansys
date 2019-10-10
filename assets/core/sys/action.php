@@ -5,6 +5,8 @@ if(@$_POST['key'] == 31337){
     $timeRightnow = date('Y/m/d H:i:s');
     switch ($_POST['action']) {
         case 0:
+            $hashPassword = password_hash($_POST['newPassword'], PASSWORD_ARGON2I);
+
             $cekEmail = "SELECT COUNT(id) as total FROM members WHERE email = ?";
             $ekseCekEmail = $pdo->prepare($cekEmail);
             $ekseCekEmail->execute([$_POST['newEmail']]);
@@ -16,7 +18,7 @@ if(@$_POST['key'] == 31337){
                 $ekseQueryRegister = $pdo->prepare($queryRegister);
                 $isValid = $ekseQueryRegister->execute([
                     $_POST['newNamaLengkap'],
-                    $_POST['newPassword'],
+                    $hashPassword,
                     $_POST['newEmail']
                 ]);
                 if($isValid){ echo "ok"; }
