@@ -13,56 +13,58 @@
     <link rel="stylesheet" href="../assets/panel/css/dashboard.css">
 </head>
 <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="yu.za">
-                <img src="../assets/core/img/logouwu.png" width="30" height="30">
-            </a>
-
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item menu-is-active" href="./dashboard.php">
-                    Dashboard
+    <div id="app">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="yu.za">
+                    <img src="../assets/core/img/logouwu.png" width="30" height="30">
                 </a>
 
-                <a class="navbar-item" href="./planning.php">
-                    Buat Baru
-                </a>
-
-                <a class="navbar-item" href="./result.php">
-                    Laporan Pencapaian
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
                 </a>
             </div>
 
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-info">
-                            <strong>Log out</strong>
-                        </a>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item menu-is-active" href="./dashboard.php">
+                        Dashboard
+                    </a>
+
+                    <a class="navbar-item" href="./planning.php">
+                        Buat Baru
+                    </a>
+
+                    <a class="navbar-item" href="./result.php">
+                        Laporan Pencapaian
+                    </a>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-info">
+                                <strong>Log out</strong>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <div class="container">
-        <div class="notification">
-            <p>Welcome, [xxx].</p>
+        <div class="container">
+            <div class="notification">
+                <p>Welcome, [xxx].</p>
+            </div>
+            <div id='calendar'></div>
         </div>
-        <div id='calendar'></div>
+
+        <footer>
+            Made with 💖 using Vue.js & Oracle
+        </footer>
     </div>
-
-    <footer>
-        Made with 💖 using Vue.js & Oracle
-    </footer>
 
     <script src="../node_modules/vue/dist/vue.min.js"></script>
     <script src="../node_modules/buefy/dist/buefy.min.js"></script>
