@@ -14,7 +14,7 @@ if(@$_POST['key'] == 31337){
 
             if($hasil == 0){
                 $queryRegister = "INSERT INTO members (id, nama, password, email, created_at) 
-                VALUES (AI_CATEGORIES.nextval, ?, ?, ?, TO_DATE('$timeRightnow', 'yyyy/mm/dd hh24:mi:ss'))";
+                VALUES (AI_MEMBERS.nextval, ?, ?, ?, TO_DATE('$timeRightnow', 'yyyy/mm/dd hh24:mi:ss'))";
                 $ekseQueryRegister = $pdo->prepare($queryRegister);
                 $isValid = $ekseQueryRegister->execute([
                     $_POST['newNamaLengkap'],
