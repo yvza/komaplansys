@@ -30,11 +30,11 @@
                         Dashboard
                     </a>
 
-                    <a class="navbar-item menu-is-active" href="./planning.php">
+                    <a class="navbar-item" href="./planning.php">
                         Buat Baru
                     </a>
 
-                    <a class="navbar-item" href="./result.php">
+                    <a class="navbar-item menu-is-active" href="./result.php">
                         Laporan Pencapaian
                     </a>
                 </div>
