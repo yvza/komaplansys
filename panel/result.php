@@ -42,7 +42,7 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-info">
+                            <a @click="keluar($event)" href="!#" class="button is-info">
                                 <strong>Log out</strong>
                             </a>
                         </div>
