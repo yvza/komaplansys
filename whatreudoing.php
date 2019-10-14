@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['members_id'])){
+    header('Location: ./panel/dashboard.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
