@@ -5,7 +5,6 @@ const x = {
             newNamaLengkap: null,
             newEmail: null,
             newPassword: null,
-
             //for login
             logEmail: null,
             logPassword: null
@@ -93,6 +92,9 @@ const x = {
                                 message: 'Berhasil Login! 😊 Redirecting...',
                                 type: 'is-success'
                             })
+                            setTimeout(function(){
+                                window.location.href = './panel/dashboard.php'
+                            }, 2000)
                             break;
 
                         case 'wrong':
