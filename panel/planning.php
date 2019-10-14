@@ -65,44 +65,9 @@ if(@$_GET['keluar'] === 'y'){
         <div class="container">
             <section>
                 <b-field grouped group-multiline>
-                    <b-select v-model="defaultSortDirection">
-                        <option value="asc">Default sort direction: ASC</option>
-                        <option value="desc">Default sort direction: DESC</option>
-                    </b-select>
-                    <b-select v-model="perPage" :disabled="!isPaginated">
-                        <option value="5">5 per page</option>
-                        <option value="10">10 per page</option>
-                        <option value="15">15 per page</option>
-                        <option value="20">20 per page</option>
-                    </b-select>
-                    <div class="control">
-                        <button class="button" @click="currentPage = 2" :disabled="!isPaginated">Set page to 2</button>
-                    </div>
                     <div class="control">
                         <button class="button" @click="isCardModalActive = true">Tambah Baru</button>
                     </div>
-                    <div class="control is-flex">
-                        <b-switch v-model="isPaginated">Paginated</b-switch>
-                    </div>
-                    <div class="control is-flex">
-                        <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Simple pagination</b-switch>
-                    </div>
-                    <b-select v-model="paginationPosition" :disabled="!isPaginated">
-                        <option value="bottom">bottom pagination</option>
-                        <option value="top">top pagination</option>
-                        <option value="both">both</option>
-                    </b-select>
-                    <b-select v-model="sortIcon">
-                        <option value="arrow-up">Arrow sort icon</option>
-                        <option value="menu-up">Caret sort icon</option>
-                        <option value="chevron-up">Chevron sort icon </option>
-                    </b-select>
-                    <b-select v-model="sortIconSize">
-                        <option value="is-small">Small sort icon</option>
-                        <option value="">Regular sort icon</option>
-                        <option value="is-medium">Medium sort icon</option>
-                        <option value="is-large">Large sort icon</option>
-                    </b-select>
                 </b-field>
 
                 <b-table
@@ -115,38 +80,49 @@ if(@$_GET['keluar'] === 'y'){
                     :default-sort-direction="defaultSortDirection"
                     :sort-icon="sortIcon"
                     :sort-icon-size="sortIconSize"
-                    default-sort="user.first_name"
+                    default-sort="id"
                     aria-next-label="Next page"
                     aria-previous-label="Previous page"
                     aria-page-label="Page"
                     aria-current-label="Current page">
 
                     <template slot-scope="props">
-                        <b-table-column field="id" label="ID" width="40" sortable numeric>
-                            {{ props.row.id }}
+                        <b-table-column field="title" label="TITLE" sortable>
+                            {{ props.row.TITLE }}
                         </b-table-column>
 
-                        <b-table-column field="user.first_name" label="First Name" sortable>
-                            {{ props.row.user.first_name }}
+                        <b-table-column field="start_date" label="START DATE" sortable>
+                            {{ props.row.START_DATE }}
                         </b-table-column>
 
-                        <b-table-column field="user.last_name" label="Last Name" sortable>
-                            {{ props.row.user.last_name }}
+                        <b-table-column field="end_date" label="END DATE" sortable>
+                            {{ props.row.END_DATE }}
                         </b-table-column>
 
-                        <b-table-column field="date" label="Date" sortable centered>
-                            <span class="tag is-success">
-                                {{ new Date(props.row.date).toLocaleDateString() }}
-                            </span>
+                        <b-table-column field="category" label="CATEGORY" sortable>
+                            <div class="select">
+                                <select @change="categoryChanged(props.row.KUNCI)" id="category" name="category">
+                                    <option v-for="cat in categories" :value="cat.ID" :selected="cat.ID == props.row.CATID">{{cat.CATEGORY}}</option>
+                                </select>
+                            </div>
                         </b-table-column>
 
-                        <b-table-column label="Gender">
-                            <span>
-                                <b-icon pack="fas"
-                                    :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                                </b-icon>
-                                {{ props.row.gender }}
-                            </span>
+                        <b-table-column field="description" label="RATING" sortable>
+                            <b-rate 
+                                v-model="props.row.DESCRIPTION" 
+                                @change="starsChange(props.row.KUNCI, $event)"></b-rate>
+                        </b-table-column>
+
+                        <b-table-column field="status" label="STATUS" sortable>
+                            <div class="select">
+                                <select @change="statusChanged(props.row.KUNCI)" id="status" name="status">
+                                    <option v-for="st in status" :value="st.ID" :selected="st.ID == props.row.SUID">{{st.STATUS}}</option>
+                                </select>
+                            </div>
+                        </b-table-column>
+
+                        <b-table-column field="action" label="ACTION" sortable>
+                            <button @click="hapus(props.row.ID)" class="button">DELETE</button>
                         </b-table-column>
                     </template>
                 </b-table>
