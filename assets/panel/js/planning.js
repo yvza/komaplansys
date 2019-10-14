@@ -109,7 +109,12 @@ const x = {
                 "&endDate="+endDate,
                 url: "../assets/panel/sys/planning.php?create=event",
                 success: function(res){
-                    console.log(res)
+                    if(res == 'ok'){
+                        app.$buefy.toast.open({
+                            message: 'Oksip 👊😎',
+                            type: 'is-success'
+                        })
+                    }
                 }
             })
         }
