@@ -175,7 +175,6 @@ if(@$_GET['keluar'] === 'y'){
                         </b-field>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button" type="button" @click="$parent.close()">Close</button>
                         <button @click="buat()" class="button is-primary">Simpan</button>
                     </footer>
                 </div>
