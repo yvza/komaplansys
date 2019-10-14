@@ -72,7 +72,10 @@ const x = {
             sortIcon: 'arrow-up',
             sortIconSize: 'is-small',
             currentPage: 1,
-            perPage: 20
+            perPage: 20,
+            //config insert new event
+            isCardModalActive: false,
+            dates: []
         }
     },
     mounted() {
