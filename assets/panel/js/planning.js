@@ -64,7 +64,7 @@ const data = [
 const x = {
     data() {
         return {
-            data: data,
+            data: [],
             isPaginated: true,
             isPaginationSimple: false,
             paginationPosition: 'bottom',
@@ -75,8 +75,23 @@ const x = {
             perPage: 20,
             //config insert new event
             isCardModalActive: false,
-            dates: []
+            dates: [],
+            //dropper
+            categories: null,
+            status: null
         }
+    },
+    created() {
+        $.ajax({
+            type: "GET",
+            url: "../assets/panel/sys/planning.php?get=schedule",
+            success: function(res){
+                let json = JSON.parse(res)
+                app.data = json[0]
+                app.categories = json[1]
+                app.status = json[2]
+            }
+        })
     },
     mounted() {
         $(".navbar-burger").click(function() {
@@ -120,6 +135,47 @@ const x = {
                         })
                     }
                 }
+            })
+        },
+        hapus(event){
+            $.ajax({
+                type: "POST",
+                url: "../assets/panel/sys/planning.php?action=delete",
+                data: "id="+event,
+                success: function(res){
+                    if (res === "ok") {
+                        app.$buefy.toast.open({
+                            message: 'Deleted 👊😎',
+                            type: 'is-success'
+                        })
+                        setTimeout(function(){
+                            window.location.href = './planning.php'
+                        }, 2000)
+                    }
+                }
+            })
+        },
+        starsChange(id, value){
+            $.ajax({
+                type: "POST",
+                url: "../assets/panel/sys/planning.php?change=stars",
+                data: "id="+id+"&value="+value
+            })
+        },
+        categoryChanged(id){
+            let category = $('#category').val()
+            $.ajax({
+                type: "POST",
+                url: "../assets/panel/sys/planning.php?change=category",
+                data: "id="+id+"&category="+category
+            })
+        },
+        statusChanged(id){
+            let status = $('#status').val()
+            $.ajax({
+                type: "POST",
+                url: "../assets/panel/sys/planning.php?change=status",
+                data: "id="+id+"&status="+status
             })
         }
     }
