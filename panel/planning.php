@@ -159,6 +159,7 @@ if(@$_GET['keluar'] === 'y'){
                     <section class="modal-card-body">
                         <b-field label="Acara">
                             <b-input
+                                id="desc"
                                 type="text"
                                 placeholder="Deskripsi"
                                 required>
@@ -167,7 +168,6 @@ if(@$_GET['keluar'] === 'y'){
 
                         <b-field label="Pilih rentang tanggal">
                             <b-datepicker
-                                @input = "holder()"
                                 placeholder="Klik untuk memilih..."
                                 v-model="dates"
                                 range>
@@ -176,7 +176,7 @@ if(@$_GET['keluar'] === 'y'){
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" type="button" @click="$parent.close()">Close</button>
-                        <button class="button is-primary">Simpan</button>
+                        <button @click="buat()" class="button is-primary">Simpan</button>
                     </footer>
                 </div>
             </b-modal>
