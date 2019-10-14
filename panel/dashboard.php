@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/panel/css/dashboard.css">
 </head>
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="yu.za">
@@ -56,7 +56,7 @@
 
         <div class="container">
             <div class="notification">
-                <p>Welcome, [xxx].</p>
+                <p>Selamat Datang, {{nama}}.</p>
             </div>
             <div id='calendar'></div>
         </div>
