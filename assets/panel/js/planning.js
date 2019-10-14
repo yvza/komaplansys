@@ -91,6 +91,27 @@ const x = {
                     window.location.href = '../whatreudoing.php'
                 }
             })
+        },
+        buat(){
+            function standart(dateobject){ //date manipulation
+                function pad(n){return n<10 ? '0'+n : n}
+                return pad(dateobject.getFullYear())+"-"+
+                pad(dateobject.getMonth()+1)+"-"+
+                pad(dateobject.getDate())
+            }
+            let startDate = standart(this.dates[0]),
+                endDate = standart(this.dates[1]),
+                desc = $('#desc').val()
+            $.ajax({
+                type: "POST",
+                data: "desc="+desc+
+                "&startDate="+startDate+
+                "&endDate="+endDate,
+                url: "../assets/panel/sys/planning.php?create=event",
+                success: function(res){
+                    console.log(res)
+                }
+            })
         }
     }
 }
