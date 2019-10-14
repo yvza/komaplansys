@@ -3,6 +3,10 @@ session_start();
 if(!isset($_SESSION['members_id'])){
     header('Location: ../whatreudoing.php');
 }
+if(@$_GET['keluar'] === 'y'){
+    session_destroy();
+    session_unset();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
