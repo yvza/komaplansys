@@ -52,9 +52,7 @@
         </nav>
 
         <div class="container">
-            <div class="notification">
-                <p>Welcome, [xxx].</p>
-            </div>
+            <div id="chartdiv"></div>
         </div>
 
         <footer>
@@ -65,6 +63,9 @@
     <script src="../node_modules/vue/dist/vue.min.js"></script>
     <script src="../node_modules/buefy/dist/buefy.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     <script src="../assets/panel/js/result.js"></script>
 </body>
 </html>
