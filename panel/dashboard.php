@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['members_id'])){
+if(!isset($_SESSION['members_id'])){
     header('Location: ../whatreudoing.php');
 }
 if(@$_GET['keluar'] === 'y'){
