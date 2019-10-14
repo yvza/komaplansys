@@ -1,9 +1,11 @@
 <?php
+session_start();
 require_once('./connection.php');
 
 if(@$_POST['key'] == 31337){
     $timeRightnow = date('Y/m/d H:i:s');
     switch ($_POST['action']) {
+        // 0: register || 1: passwrd
         case 0:
             $hashPassword = password_hash($_POST['newPassword'], PASSWORD_ARGON2I);
 
@@ -39,6 +41,8 @@ if(@$_POST['key'] == 31337){
             if($countRes == 1){
                 $originPassword = $result[0]['PASSWORD'];
                 if(password_verify($_POST['logPassword'], $originPassword)){
+                    $_SESSION['members_id'] = $result[0]['ID'];
+                    $_SESSION['members_nama'] = $result[0]['NAMA'];
                     echo "valid";
                 }else{
                     echo "wrong";
