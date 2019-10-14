@@ -12,7 +12,16 @@ const x = {
         })
     },
     methods: {
-        
+        keluar(event){
+            event.preventDefault()
+            $.ajax({
+                type: 'GET',
+                url: './dashboard.php?keluar=y',
+                success: function(){
+                    window.location.href = '../whatreudoing.php'
+                }
+            })
+        }
     }
 }
 
