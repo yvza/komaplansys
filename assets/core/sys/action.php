@@ -1,9 +1,11 @@
 <?php
+session_start();
 require_once('./connection.php');
 
 if(@$_POST['key'] == 31337){
     $timeRightnow = date('Y/m/d H:i:s');
     switch ($_POST['action']) {
+        // 0: register || 1: passwrd
         case 0:
             $hashPassword = password_hash($_POST['newPassword'], PASSWORD_ARGON2I);
 
@@ -14,7 +16,7 @@ if(@$_POST['key'] == 31337){
 
             if($hasil == 0){
                 $queryRegister = "INSERT INTO members (id, nama, password, email, created_at) 
-                VALUES (AI_CATEGORIES.nextval, ?, ?, ?, TO_DATE('$timeRightnow', 'yyyy/mm/dd hh24:mi:ss'))";
+                VALUES (AI_MEMBERS.nextval, ?, ?, ?, TO_DATE('$timeRightnow', 'yyyy/mm/dd hh24:mi:ss'))";
                 $ekseQueryRegister = $pdo->prepare($queryRegister);
                 $isValid = $ekseQueryRegister->execute([
                     $_POST['newNamaLengkap'],
@@ -39,6 +41,8 @@ if(@$_POST['key'] == 31337){
             if($countRes == 1){
                 $originPassword = $result[0]['PASSWORD'];
                 if(password_verify($_POST['logPassword'], $originPassword)){
+                    $_SESSION['members_id'] = $result[0]['ID'];
+                    $_SESSION['members_nama'] = $result[0]['NAMA'];
                     echo "valid";
                 }else{
                     echo "wrong";

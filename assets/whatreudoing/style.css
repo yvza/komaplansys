@@ -129,6 +129,29 @@ body {
     cursor: pointer;
 }
 
+.pemisah {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.pemisah > .kiri,
+.pemisah > .kanan {
+    width: 50%;
+    display: flex;
+}
+
+.kanan {
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.kiri {
+    justify-content: center;
+    align-items: center;
+}
+
 /*Animation Classes And Prerequisits */
 .above {
     z-index: 1;
@@ -152,8 +175,8 @@ body {
     -webkit-filter: blur(0.8px);
     filter: blur(0.8px);
     webkit-filter: blur(0.8px);
-    -webkit-transform: rotateZ(-90deg) translate3d(0, 100px, 0) scale(0.7);
-    transform: rotateZ(-90deg) translate3d(0, 100px, 0) scale(0.7);
+    -webkit-transform: rotateZ(-90deg) translate3d(0, 60px, 0) scale(0.7);
+    transform: rotateZ(-90deg) translate3d(0, 60px, 0) scale(0.7);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -162,8 +185,8 @@ body {
     -webkit-filter: blur(1px);
     filter: blur(1px);
     webkit-filter: blur(1px);
-    -webkit-transform: rotateZ(-90deg) translateX(0px) translateY(100px) scale(0.7);
-    transform: rotateZ(-90deg) translateX(0px) translateY(100px) scale(0.7);
+    -webkit-transform: rotateZ(-90deg) translateX(0px) translateY(65px) scale(0.7);
+    transform: rotateZ(-90deg) translateX(0px) translateY(65px) scale(0.7);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 

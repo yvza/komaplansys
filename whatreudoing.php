@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['members_id'])){
+    header('Location: ./panel/dashboard.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hey Whatsup!</title>
+    <link rel="shortcut icon" href="./assets/core/img/logouwu.png" type="image/x-icon">
     <link rel="stylesheet" href="./node_modules/buefy/dist/buefy.min.css">
     <link rel="stylesheet" href="./assets/whatreudoing/style.css">
 </head>
@@ -14,6 +21,14 @@
     <div class="form-collection" id="app">
         <div class="card elevation-3 limit-width log-in-card below turned">
             <div class="card-body">
+                <div class="pemisah">
+                    <div class="kiri">
+                        <img src="./assets/core/img/logouwu.png" alt="Kelompok Lima Planning System" style="width:100px;height:100px;">
+                    </div>
+                    <div class="kanan">
+                        <h5>Kelompok Lima Planning System</h5>
+                    </div>
+                </div>
                 <div class="input-group email">
                     <input v-model="logEmail" type="text" placeholder="Email"/>
                 </div>
@@ -29,6 +44,14 @@
 
             <div class="card elevation-2 limit-width sign-up-card above">
                 <div class="card-body">
+                    <div class="pemisah">
+                        <div class="kiri">
+                            <img src="./assets/core/img/logouwu.png" alt="Kelompok Lima Planning System" style="width:100px;height:100px;">
+                        </div>
+                        <div class="kanan">
+                            <h5>Kelompok Lima Planning System</h5>
+                        </div>
+                    </div>
                     <div class="input-group fullname">
                         <input v-model="newNamaLengkap" type="text" placeholder="Nama Lengkap"/>
                     </div>

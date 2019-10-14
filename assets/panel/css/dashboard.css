@@ -1,0 +1,20 @@
+[v-cloak] {
+    display: none;
+}
+
+body {
+    background: #F5F5F7;
+}
+
+.menu-is-active {
+    background: #fafafa;
+}
+
+div#app > footer {
+    margin-top: 50px;
+    height: 3.25rem;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
