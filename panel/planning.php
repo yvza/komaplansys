@@ -78,6 +78,9 @@ if(@$_GET['keluar'] === 'y'){
                     <div class="control">
                         <button class="button" @click="currentPage = 2" :disabled="!isPaginated">Set page to 2</button>
                     </div>
+                    <div class="control">
+                        <button class="button" @click="isCardModalActive = true">Tambah Baru</button>
+                    </div>
                     <div class="control is-flex">
                         <b-switch v-model="isPaginated">Paginated</b-switch>
                     </div>
@@ -148,6 +151,35 @@ if(@$_GET['keluar'] === 'y'){
                     </template>
                 </b-table>
             </section>
+            <b-modal :active.sync="isCardModalActive" scroll="keep">
+                <div class="modal-card" style="width:auto; height: 650px;">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Masukkan Agenda Baru</p>
+                    </header>
+                    <section class="modal-card-body">
+                        <b-field label="Acara">
+                            <b-input
+                                type="text"
+                                placeholder="Deskripsi"
+                                required>
+                            </b-input>
+                        </b-field>
+
+                        <b-field label="Pilih rentang tanggal">
+                            <b-datepicker
+                                @input = "holder()"
+                                placeholder="Klik untuk memilih..."
+                                v-model="dates"
+                                range>
+                            </b-datepicker>
+                        </b-field>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button class="button" type="button" @click="$parent.close()">Close</button>
+                        <button class="button is-primary">Simpan</button>
+                    </footer>
+                </div>
+            </b-modal>
         </div>
 
         <footer>
