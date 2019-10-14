@@ -12,7 +12,7 @@ const x = {
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                right: 'dayGridMonth,timeGridWeek,timeGridDay' //dayGridMonth,timeGridWeek,timeGridDay
             },
             editable: true,
             eventLimit: true,
@@ -20,7 +20,14 @@ const x = {
                 alert('Clicked on: ' + info.dateStr);
                 alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
                 alert('Current view: ' + info.view.type);
-            }
+            },
+            events: [
+                { // this object will be "parsed" into an Event Object
+                    title: 'Tessss', // a property!
+                    start: '2019-10-05', // a property!
+                    end: '2019-10-16' // a property! ** see important note below about 'end' **
+                }
+            ]
         })
         calendar.render()
 
