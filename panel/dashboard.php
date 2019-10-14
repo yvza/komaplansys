@@ -45,7 +45,7 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-info">
+                            <a @click="keluar($event)" href="!#" class="button is-info">
                                 <strong>Log out</strong>
                             </a>
                         </div>
@@ -56,7 +56,7 @@
 
         <div class="container">
             <div class="notification">
-                <p>Selamat Datang, {{nama}}.</p>
+                <p>Selamat Datang, {{nama}} 😎</p>
             </div>
             <div id='calendar'></div>
         </div>
