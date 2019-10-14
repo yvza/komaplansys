@@ -17,7 +17,7 @@ if(!isset($_SESSION['members_id'])){
     <link rel="stylesheet" href="../assets/panel/css/planning.css">
 </head>
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="yu.za">
