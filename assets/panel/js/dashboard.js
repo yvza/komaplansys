@@ -1,8 +1,20 @@
 const x = {
     data() {
         return {
-            
+            //self info
+            nama: null
         }
+    },
+    created() {
+        //get user info
+        $.ajax({
+            type: 'GET',
+            url: '../assets/panel/sys/dashboard.php?get=userinfo',
+            success: function(res){
+                let json = JSON.parse(res)
+                app.nama = json.NAMA
+            }
+        })
     },
     mounted() {
         var calendarEl = document.getElementById('calendar')
