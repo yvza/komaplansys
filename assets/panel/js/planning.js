@@ -163,13 +163,20 @@ const x = {
                 data: "id="+event,
                 success: function(res){
                     if (res === "ok") {
-                        app.$buefy.toast.open({
-                            message: 'Deleted 👊😎',
-                            type: 'is-success'
+                        $.ajax({
+                            type: "GET",
+                            url: "../assets/panel/sys/planning.php?get=schedule",
+                            success: function(res){
+                                let json = JSON.parse(res)
+                                app.data = json[0]
+                                app.categories = json[1]
+                                app.status = json[2]
+                                app.$buefy.toast.open({
+                                    message: 'Deleted 👊😎',
+                                    type: 'is-success'
+                                })
+                            }
                         })
-                        setTimeout(function(){
-                            window.location.href = './planning.php'
-                        }, 2000)
                     }
                 }
             })
