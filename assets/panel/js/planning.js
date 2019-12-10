@@ -120,22 +120,41 @@ const x = {
             }
             let startDate = standart(this.dates[0]),
                 endDate = standart(this.dates[1]),
-                desc = $('#desc').val()
-            $.ajax({
-                type: "POST",
-                data: "desc="+desc+
-                "&startDate="+startDate+
-                "&endDate="+endDate,
-                url: "../assets/panel/sys/planning.php?create=event",
-                success: function(res){
-                    if(res === 'ok'){
-                        app.$buefy.toast.open({
-                            message: 'Oksip 👊😎',
-                            type: 'is-success'
-                        })
+                desc = $('#desc').val(),
+                currentDate = standart(new Date())
+            if(startDate < currentDate || desc == ''){
+                app.$buefy.toast.open({
+                    message: 'Input tidak valid 😪',
+                    type: 'is-danger'
+                })
+            }else{
+                $.ajax({
+                    type: "POST",
+                    data: "desc="+desc+
+                    "&startDate="+startDate+
+                    "&endDate="+endDate,
+                    url: "../assets/panel/sys/planning.php?create=event",
+                    success: function(res){
+                        if(res === 'ok'){
+                            $.ajax({
+                                type: "GET",
+                                url: "../assets/panel/sys/planning.php?get=schedule",
+                                success: function(res){
+                                    let json = JSON.parse(res)
+                                    app.data = json[0]
+                                    app.categories = json[1]
+                                    app.status = json[2]
+                                    app.$buefy.toast.open({
+                                        message: 'Yes sir!, 3sec... 👊😎',
+                                        type: 'is-success'
+                                    })
+                                    setTimeout(function(){ app.isCardModalActive = false }, 3000)
+                                }
+                            })
+                        }
                     }
-                }
-            })
+                })
+            }
         },
         hapus(event){
             $.ajax({
