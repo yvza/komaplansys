@@ -144,11 +144,11 @@ const x = {
                                     app.data = json[0]
                                     app.categories = json[1]
                                     app.status = json[2]
+                                    app.isCardModalActive = false
                                     app.$buefy.toast.open({
-                                        message: 'Yes sir!, 3sec... 👊😎',
+                                        message: 'Anjay mabar 👊😎',
                                         type: 'is-success'
                                     })
-                                    setTimeout(function(){ app.isCardModalActive = false }, 3000)
                                 }
                             })
                         }
