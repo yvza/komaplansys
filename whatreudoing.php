@@ -33,7 +33,7 @@ if(isset($_SESSION['members_id'])){
                     <input v-model="logEmail" type="text" placeholder="Email"/>
                 </div>
                     <div class="input-group password">
-                        <input v-model="logPassword" type="password" placeholder="Password"/>
+                        <input @keyup.enter="masuk()" v-model="logPassword" type="password" placeholder="Password"/>
                     </div>
                     <a @click="lupaPassword($event)" href="!#" class="box-btn">Lupa Password?</a>
                 </div>
@@ -59,7 +59,7 @@ if(isset($_SESSION['members_id'])){
                         <input v-model="newEmail" type="email" placeholder="Email"/>
                     </div>
                     <div class="input-group password">
-                        <input v-model="newPassword" type="password" placeholder="Password"/>
+                        <input @keyup.enter="daftar()" v-model="newPassword" type="password" placeholder="Password"/>
                     </div>
                 </div>
                 <div class="card-footer">
