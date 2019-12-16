@@ -53,11 +53,9 @@ if(@$_GET['keluar'] === 'y'){
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="buttons">
-                            <a @click="keluar($event)" href="!#" class="button is-info">
-                                <strong>Log out</strong>
-                            </a>
-                        </div>
+                        <b-button @click="keluar($event)" icon-right="exit-run" class="is-warning">
+                            KELUAR
+                        </b-button>
                     </div>
                 </div>
             </div>
@@ -65,11 +63,6 @@ if(@$_GET['keluar'] === 'y'){
 
         <div class="container">
             <section>
-                <!-- <b-field grouped group-multiline>
-                    <div class="control">
-                        <button class="button" @click="showModal()">Tambah Baru</button>
-                    </div>
-                </b-field> -->
                 <div class="field">
                     <b-switch v-model="isSwitched">
                         Tambah Agenda
@@ -170,7 +163,7 @@ if(@$_GET['keluar'] === 'y'){
                     </template>
                 </b-table>
             </section>
-            <b-modal :active.sync="isCardModalActive" scroll="keep">
+            <!-- <b-modal :active.sync="isCardModalActive" scroll="keep">
                 <div class="modal-card" style="width:auto; height: 650px;">
                     <header class="modal-card-head">
                         <p class="modal-card-title">Masukkan Agenda Baru</p>
@@ -197,7 +190,7 @@ if(@$_GET['keluar'] === 'y'){
                         <button @click="buat()" class="button is-primary">Simpan</button>
                     </footer>
                 </div>
-            </b-modal>
+            </b-modal> -->
         </div>
 
         <footer>
