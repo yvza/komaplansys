@@ -92,7 +92,7 @@ if(@$_GET['keluar'] === 'y'){
                                 <div class="color-picker"></div>
                             </b-field>
 
-                            <b-field label="Note">
+                            <b-field label="Catatan">
                                 <div id="editor"></div>
                             </b-field>
 
