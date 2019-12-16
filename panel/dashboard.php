@@ -16,6 +16,7 @@ if(@$_GET['keluar'] === 'y'){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard - KOMAPLANSYS</title>
     <link rel="shortcut icon" href="../assets/core/img/logouwu.png" type="image/x-icon">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../node_modules/buefy/dist/buefy.min.css">
     <link rel="stylesheet" href="../node_modules/@fullcalendar/core/main.min.css">
     <link rel="stylesheet" href="../node_modules/@fullcalendar/daygrid/main.min.css">
@@ -54,11 +55,9 @@ if(@$_GET['keluar'] === 'y'){
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="buttons">
-                            <a @click="keluar($event)" href="!#" class="button is-info">
-                                <strong>Log out</strong>
-                            </a>
-                        </div>
+                        <b-button @click="keluar($event)" icon-right="exit-run" class="is-warning">
+                            KELUAR
+                        </b-button>
                     </div>
                 </div>
             </div>
