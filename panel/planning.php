@@ -87,16 +87,20 @@ if(@$_GET['keluar'] === 'y'){
                                 </b-input>
                             </b-field>
 
-                            <b-field label="Warna">
-                                <div class="color-picker"></div>
-                            </b-field>
-
                             <b-field label="Pilih Rentang Tanggal   ">
                                 <b-datepicker
                                     placeholder="Klik untuk memilih..."
                                     v-model="dates"
                                     range>
                                 </b-datepicker>
+                            </b-field>
+
+                            <b-field label="Warna Label">
+                                <div class="color-picker"></div>
+                            </b-field>
+
+                            <b-field label="Note">
+                                <div id="editor"></div>
                             </b-field>
 
                             <br><b-button icon-left="send-outline" class="is-info is-outlined">
@@ -107,6 +111,7 @@ if(@$_GET['keluar'] === 'y'){
                 </div>
 
                 <b-table
+                    v-show="!isSwitched"
                     :data="data"
                     :paginated="isPaginated"
                     :per-page="perPage"
@@ -202,6 +207,7 @@ if(@$_GET['keluar'] === 'y'){
     <script src="../node_modules/buefy/dist/buefy.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
     <script src="../assets/panel/js/planning.js"></script>
 </body>
 </html>
