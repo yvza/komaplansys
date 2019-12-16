@@ -66,6 +66,7 @@ if(isset($_SESSION['members_id'])){
                     <button @click="daftar()" type="submit" class="signup-btn">DAFTAR</button>
                 </div>
             </div>
+            <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
         </div>
     </div>
     <script src="./node_modules/vue/dist/vue.min.js"></script>
