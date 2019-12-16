@@ -163,7 +163,9 @@ if(@$_GET['keluar'] === 'y'){
                         </b-table-column>
 
                         <b-table-column field="action" label="ACTION" sortable>
-                            <button @click="hapus(props.row.KUNCI)" class="button">DELETE</button>
+                            <b-button icon-left="magnify" class="is-success is-outlined"></b-button>
+                            <b-button icon-left="file-document-edit" class="is-dark is-outlined"></b-button>
+                            <b-button @click="hapus(props.row.KUNCI)" icon-left="delete-empty" class="is-danger is-outlined"></b-button>
                         </b-table-column>
                     </template>
                 </b-table>
