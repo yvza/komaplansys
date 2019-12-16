@@ -7,7 +7,10 @@ const x = {
             newPassword: null,
             //for login
             logEmail: null,
-            logPassword: null
+            logPassword: null,
+            //loader
+            isLoading: false,
+            isFullPage: true
         }
     },
     created() {
@@ -80,6 +83,7 @@ const x = {
             this.logPassword == null || this.logPassword == ''){
                 return false
             }
+            this.isLoading = true
             $.ajax({
                 type: "POST",
                 url: "./assets/core/sys/action.php",
@@ -88,6 +92,7 @@ const x = {
                 success: function(res){
                     switch (res) {
                         case 'valid':
+                            app.isLoading = false
                             app.$buefy.toast.open({
                                 message: 'Berhasil Login! 😊 Redirecting...',
                                 type: 'is-success'
@@ -98,6 +103,7 @@ const x = {
                             break;
 
                         case 'wrong':
+                            app.isLoading = false
                             app.$buefy.toast.open({
                                 message: 'Cek kembali inputan anda! 😃',
                                 type: 'is-light'
@@ -105,6 +111,7 @@ const x = {
                             break;
 
                         case 'notregistered':
+                            app.isLoading = false
                             app.$buefy.toast.open({
                                 message: 'Email belum terdaftar! 🤣',
                                 type: 'is-info'
