@@ -199,6 +199,7 @@ if(@$_GET['keluar'] === 'y'){
                 </div>
             </b-modal> -->
         </div>
+        <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="false"></b-loading>
 
         <footer>
             Made with 💖 using Vue.js & Oracle
