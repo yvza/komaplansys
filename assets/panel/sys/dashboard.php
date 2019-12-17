@@ -12,14 +12,15 @@ if(@$_GET['get'] === "allinfo"){
     $ekse = $pdo->query($queryGetUserInfo)->fetch();
     array_push($arrHelper, $ekse);
 
-    $query = "SELECT title, start_date, end_date FROM plansys WHERE user_id = {$_SESSION['members_id']}";
+    $query = "SELECT title, start_date, end_date, color FROM plansys WHERE user_id = {$_SESSION['members_id']}";
     $ekse = $pdo->query($query)->fetchAll();
     array_push($arrHelper, []);
     foreach ($ekse as $key => $value) {
         $costumArray = [
             'title' => $value['TITLE'],
             'start' => $value['START_DATE'],
-            'end' => $value['END_DATE']
+            'end' => $value['END_DATE'],
+            'backgroundColor' => $value['COLOR']
         ];
         array_push($arrHelper[1], $costumArray);
     }

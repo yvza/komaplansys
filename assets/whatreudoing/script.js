@@ -1,13 +1,16 @@
 const x = {
     data() {
         return {
-            //for register
+            // for register
             newNamaLengkap: null,
             newEmail: null,
             newPassword: null,
-            //for login
+            // for login
             logEmail: null,
-            logPassword: null
+            logPassword: null,
+            // loader
+            isLoading: false,
+            isFullPage: true
         }
     },
     created() {
@@ -33,11 +36,8 @@ const x = {
             }, 300)
         })
     },
-    mounted() {
-        
-    },
     methods: {
-        //0: daftar | 1: login
+        // 0: daftar | 1: login
         daftar(){
             if(this.newNamaLengkap == null || this.newNamaLengkap == '' ||
             this.newEmail == null || this.newEmail == '' ||
@@ -66,6 +66,9 @@ const x = {
                             break;
 
                         case 'emailexist':
+                            app.newNamaLengkap = null
+                            app.newEmail = null
+                            app.newPassword = null
                             app.$buefy.toast.open({
                                 message: 'Email sudah terdaftar anjay mabar slur! 👊😎',
                                 type: 'is-white'
@@ -80,6 +83,7 @@ const x = {
             this.logPassword == null || this.logPassword == ''){
                 return false
             }
+            this.isLoading = true
             $.ajax({
                 type: "POST",
                 url: "./assets/core/sys/action.php",
@@ -88,6 +92,7 @@ const x = {
                 success: function(res){
                     switch (res) {
                         case 'valid':
+                            app.isLoading = false
                             app.$buefy.toast.open({
                                 message: 'Berhasil Login! 😊 Redirecting...',
                                 type: 'is-success'
@@ -98,6 +103,9 @@ const x = {
                             break;
 
                         case 'wrong':
+                            app.logEmail = null
+                            app.logPassword = null
+                            app.isLoading = false
                             app.$buefy.toast.open({
                                 message: 'Cek kembali inputan anda! 😃',
                                 type: 'is-light'
@@ -105,6 +113,9 @@ const x = {
                             break;
 
                         case 'notregistered':
+                            app.logEmail = null
+                            app.logPassword = null
+                            app.isLoading = false
                             app.$buefy.toast.open({
                                 message: 'Email belum terdaftar! 🤣',
                                 type: 'is-info'

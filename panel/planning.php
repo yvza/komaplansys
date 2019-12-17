@@ -16,8 +16,9 @@ if(@$_GET['keluar'] === 'y'){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Buat Baru - KOMAPLANSYS</title>
     <link rel="shortcut icon" href="../assets/core/img/logouwu.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../node_modules/buefy/dist/buefy.min.css">
+    <link rel="stylesheet" href="../node_modules/@simonwep/pickr/dist/themes/nano.min.css">
     <link rel="stylesheet" href="../assets/panel/css/planning.css">
 </head>
 <body>
@@ -52,11 +53,9 @@ if(@$_GET['keluar'] === 'y'){
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="buttons">
-                            <a @click="keluar($event)" href="!#" class="button is-info">
-                                <strong>Log out</strong>
-                            </a>
-                        </div>
+                        <b-button @click="keluar($event)" icon-right="exit-run" class="is-warning">
+                            KELUAR
+                        </b-button>
                     </div>
                 </div>
             </div>
@@ -64,13 +63,49 @@ if(@$_GET['keluar'] === 'y'){
 
         <div class="container">
             <section>
-                <b-field grouped group-multiline>
-                    <div class="control">
-                        <button class="button" @click="isCardModalActive = true">Tambah Baru</button>
+                <div class="field">
+                    <b-switch v-model="isSwitched">
+                        Tambah Agenda
+                    </b-switch>
+                </div>
+                <div v-show="isSwitched" class="agendaWrapper">
+                    <div class="columns">
+                        <div class="column">
+                            <b-field label="Judul Kegiatan">
+                                <b-input
+                                    id="desc"
+                                    type="text"
+                                    placeholder="Saya ingin..."
+                                    required>
+                                </b-input>
+                            </b-field>
+
+                            <b-field label="Pilih Rentang Tanggal   ">
+                                <b-datepicker
+                                    placeholder="Klik untuk memilih..."
+                                    v-model="dates"
+                                    range>
+                                </b-datepicker>
+                            </b-field>
+
+                            <b-field label="Warna Label">
+                                <div class="color-picker"></div>
+                            </b-field>
+
+                            <b-field label="Catatan">
+                                <div id="editor"></div>
+                            </b-field>
+
+                            <br><b-button @click="buat()" icon-left="send-outline" class="is-info is-outlined">
+                                Buat Sekarang
+                            </b-button>
+                        </div>
                     </div>
-                </b-field>
+                </div>
 
                 <b-table
+                    v-if="data.length != 0"
+                    v-show="!isSwitched"
                     :data="data"
                     :paginated="isPaginated"
                     :per-page="perPage"
@@ -107,55 +142,33 @@ if(@$_GET['keluar'] === 'y'){
                             </div>
                         </b-table-column>
 
-                        <b-table-column field="description" label="RATING" sortable>
-                            <b-rate 
-                                v-model="props.row.DESCRIPTION" 
-                                @change="starsChange(props.row.KUNCI, $event)"></b-rate>
-                        </b-table-column>
-
                         <b-table-column field="status" label="STATUS" sortable>
                             <div class="select">
-                                <select @change="statusChanged(props.row.KUNCI)" id="status" name="status">
+                                <select v-if="props.row.SUID == 2" @change="statusChanged(props.row.KUNCI)" id="status" name="status" disabled>
+                                    <option v-for="st in status" :value="st.ID" :selected="st.ID == props.row.SUID">{{st.STATUS}}</option>
+                                </select>
+                                <select v-else @change="statusChanged(props.row.KUNCI)" id="status" name="status">
                                     <option v-for="st in status" :value="st.ID" :selected="st.ID == props.row.SUID">{{st.STATUS}}</option>
                                 </select>
                             </div>
                         </b-table-column>
 
                         <b-table-column field="action" label="ACTION" sortable>
-                            <button @click="hapus(props.row.KUNCI)" class="button">DELETE</button>
+                            <b-button icon-left="magnify" class="is-success is-outlined"></b-button>
+                            <b-button icon-left="file-document-edit" class="is-dark is-outlined"></b-button>
+                            <b-button @click="hapus(props.row.KUNCI)" icon-left="delete-empty" class="is-danger is-outlined"></b-button>
                         </b-table-column>
                     </template>
                 </b-table>
-            </section>
-            <b-modal :active.sync="isCardModalActive" scroll="keep">
-                <div class="modal-card" style="width:auto; height: 650px;">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">Masukkan Agenda Baru</p>
-                    </header>
-                    <section class="modal-card-body">
-                        <b-field label="Acara">
-                            <b-input
-                                id="desc"
-                                type="text"
-                                placeholder="Deskripsi"
-                                required>
-                            </b-input>
-                        </b-field>
 
-                        <b-field label="Pilih rentang tanggal">
-                            <b-datepicker
-                                placeholder="Klik untuk memilih..."
-                                v-model="dates"
-                                range>
-                            </b-datepicker>
-                        </b-field>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button @click="buat()" class="button is-primary">Simpan</button>
-                    </footer>
+                <div v-else
+                    class="columns"
+                    v-show="!isSwitched">
+                    <div class="column has-text-centered">BELUM ADA AGENDA 😭</div>
                 </div>
-            </b-modal>
+            </section>
         </div>
+        <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="false"></b-loading>
 
         <footer>
             Made with 💖 using Vue.js & Oracle
@@ -165,6 +178,8 @@ if(@$_GET['keluar'] === 'y'){
     <script src="../node_modules/vue/dist/vue.min.js"></script>
     <script src="../node_modules/buefy/dist/buefy.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
     <script src="../assets/panel/js/planning.js"></script>
 </body>
 </html>

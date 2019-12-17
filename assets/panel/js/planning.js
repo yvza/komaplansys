@@ -60,7 +60,7 @@ const data = [
     {"id":59,"user":{"first_name":"Frank","last_name":"Porter"},"date":"2016/09/08 00:48:14","gender":"Male"},
     {"id":60,"user":{"first_name":"Christopher","last_name":"Palmer"},"date":"2016/05/24 08:58:12","gender":"Male"}
 ]
-
+let pickr, editor
 const x = {
     data() {
         return {
@@ -73,12 +73,18 @@ const x = {
             sortIconSize: 'is-small',
             currentPage: 1,
             perPage: 20,
-            //config insert new event
-            isCardModalActive: false,
+            // config insert new event
             dates: [],
-            //dropper
+            color: null,
+            note: null,
+            // dropper
             categories: null,
-            status: null
+            status: null,
+            // create data switcher
+            isSwitched: false,
+            // loader config
+            isLoading: false,
+            isFullPage: true
         }
     },
     created() {
@@ -99,6 +105,50 @@ const x = {
             $(".navbar-burger").toggleClass("is-active")
             $(".navbar-menu").toggleClass("is-active")
         })
+        // color picker configuration
+        pickr = Pickr.create({
+            el: '.color-picker',
+            theme: 'nano', // or 'monolith', or 'nano'
+            swatches: [
+                'rgba(244, 67, 54, 1)',
+                'rgba(233, 30, 99, 0.95)',
+                'rgba(156, 39, 176, 0.9)',
+                'rgba(103, 58, 183, 0.85)',
+                'rgba(63, 81, 181, 0.8)',
+                'rgba(33, 150, 243, 0.75)',
+                'rgba(3, 169, 244, 0.7)',
+                'rgba(0, 188, 212, 0.7)',
+                'rgba(0, 150, 136, 0.75)',
+                'rgba(76, 175, 80, 0.8)',
+                'rgba(139, 195, 74, 0.85)',
+                'rgba(205, 220, 57, 0.9)',
+                'rgba(255, 235, 59, 0.95)',
+                'rgba(255, 193, 7, 1)'
+            ],
+            components: {
+                // Main components
+                preview: true,
+                opacity: true,
+                hue: true,
+                // Input / output Options
+                interaction: {
+                    save: true
+                }
+            }
+        })
+        // pockr watcher
+        pickr.on('save', (color, instance) => {
+            this.color = pickr.getSelectedColor().toHEXA().toString()
+        })
+        // ckeditor 5 config
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( newEditor => {
+                editor = newEditor
+            })
+            .catch( error => {
+                console.error( error );
+        })
     },
     methods: {
         keluar(event){
@@ -112,54 +162,98 @@ const x = {
             })
         },
         buat(){
-            function standart(dateobject){ //date manipulation
+            this.isLoading = true
+            this.color = pickr.getSelectedColor().toHEXA().toString()
+            function standart(dateobject){ // date manipulation
                 function pad(n){return n<10 ? '0'+n : n}
                 return pad(dateobject.getFullYear())+"-"+
                 pad(dateobject.getMonth()+1)+"-"+
                 pad(dateobject.getDate())
             }
+            if(this.dates.length == 0){
+                app.$buefy.toast.open({
+                    message: 'Input tidak valid 😪',
+                    type: 'is-danger'
+                })
+                return false
+            }
             let startDate = standart(this.dates[0]),
                 endDate = standart(this.dates[1]),
-                desc = $('#desc').val()
-            $.ajax({
-                type: "POST",
-                data: "desc="+desc+
-                "&startDate="+startDate+
-                "&endDate="+endDate,
-                url: "../assets/panel/sys/planning.php?create=event",
-                success: function(res){
-                    if(res === 'ok'){
-                        app.$buefy.toast.open({
-                            message: 'Oksip 👊😎',
-                            type: 'is-success'
-                        })
+                desc = $('#desc').val(),
+                color = this.color,
+                note = editor.getData(),
+                currentDate = standart(new Date())
+            if(startDate < currentDate || desc == '' || note == null){
+                app.$buefy.toast.open({
+                    message: 'Input tidak valid 😪',
+                    type: 'is-danger'
+                })
+            }else{
+                $.ajax({
+                    type: "POST",
+                    data: "desc="+desc+
+                    "&startDate="+startDate+
+                    "&endDate="+endDate+
+                    "&color="+color+
+                    "&note="+note,
+                    url: "../assets/panel/sys/planning.php?create=event",
+                    success: function(res){
+                        if(res === 'ok'){
+                            app.dates = []
+                            $('#desc').val('')
+                            editor.setData('')
+                            $.ajax({
+                                type: "GET",
+                                url: "../assets/panel/sys/planning.php?get=schedule",
+                                success: function(res){
+                                    app.isLoading = false
+                                    let json = JSON.parse(res)
+                                    app.data = json[0]
+                                    app.categories = json[1]
+                                    app.status = json[2]
+                                    app.$buefy.toast.open({
+                                        message: 'Berhasil ditambahkan 🎉',
+                                        type: 'is-success'
+                                    })
+                                }
+                            })
+                        }
                     }
-                }
-            })
+                })
+            }
         },
         hapus(event){
-            $.ajax({
-                type: "POST",
-                url: "../assets/panel/sys/planning.php?action=delete",
-                data: "id="+event,
-                success: function(res){
-                    if (res === "ok") {
-                        app.$buefy.toast.open({
-                            message: 'Deleted 👊😎',
-                            type: 'is-success'
-                        })
-                        setTimeout(function(){
-                            window.location.href = './planning.php'
-                        }, 2000)
-                    }
+            this.$buefy.dialog.confirm({
+                title: 'Menghapus agenda',
+                message: 'Yakin akan men-<b>delete</b> agenda? Tindakan ini tidak dapat dibatalkan.',
+                confirmText: 'Tetap hapus',
+                type: 'is-danger',
+                hasIcon: true,
+                onConfirm: () => {
+                    $.ajax({
+                        type: "POST",
+                        url: "../assets/panel/sys/planning.php?action=delete",
+                        data: "id="+event,
+                        success: function(res){
+                            if (res === "ok") {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "../assets/panel/sys/planning.php?get=schedule",
+                                    success: function(res){
+                                        let json = JSON.parse(res)
+                                        app.data = json[0]
+                                        app.categories = json[1]
+                                        app.status = json[2]
+                                        app.$buefy.toast.open({
+                                            message: 'Berhasil dihapus 🎇',
+                                            type: 'is-success'
+                                        })
+                                    }
+                                })
+                            }
+                        }
+                    })
                 }
-            })
-        },
-        starsChange(id, value){
-            $.ajax({
-                type: "POST",
-                url: "../assets/panel/sys/planning.php?change=stars",
-                data: "id="+id+"&value="+value
             })
         },
         categoryChanged(id){
@@ -175,7 +269,26 @@ const x = {
             $.ajax({
                 type: "POST",
                 url: "../assets/panel/sys/planning.php?change=status",
-                data: "id="+id+"&status="+status
+                data: "id="+id+"&status="+status,
+                success: function(res){
+                    if(res === "ok"){
+                        $.ajax({
+                            type: "GET",
+                            url: "../assets/panel/sys/planning.php?get=schedule",
+                            success: function(res){
+                                app.isLoading = false
+                                let json = JSON.parse(res)
+                                app.data = json[0]
+                                app.categories = json[1]
+                                app.status = json[2]
+                                app.$buefy.toast.open({
+                                    message: 'Horrayy! 🎊',
+                                    type: 'is-success'
+                                })
+                            }
+                        })
+                    }
+                }
             })
         }
     }

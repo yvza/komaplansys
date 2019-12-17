@@ -10,9 +10,6 @@ const x = {
             endDate: null
         }
     },
-    created() {
-
-    },
     mounted() {
         $.ajax({
             type: 'GET',
@@ -53,7 +50,10 @@ const x = {
                                 url: "../assets/panel/sys/dashboard.php?moving=schedule",
                                 success: function(res){
                                     if(res === 'ok'){
-                                        app.$buefy.toast.open({message: "Sukses lurr!", type: 'is-success'})
+                                        app.$buefy.toast.open({
+                                            message: 'Berhasil mengubah acara ✨',
+                                            type: 'is-success'
+                                        })
                                     }
                                 }
                             }),
