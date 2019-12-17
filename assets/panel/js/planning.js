@@ -269,7 +269,26 @@ const x = {
             $.ajax({
                 type: "POST",
                 url: "../assets/panel/sys/planning.php?change=status",
-                data: "id="+id+"&status="+status
+                data: "id="+id+"&status="+status,
+                success: function(res){
+                    if(res === "ok"){
+                        $.ajax({
+                            type: "GET",
+                            url: "../assets/panel/sys/planning.php?get=schedule",
+                            success: function(res){
+                                app.isLoading = false
+                                let json = JSON.parse(res)
+                                app.data = json[0]
+                                app.categories = json[1]
+                                app.status = json[2]
+                                app.$buefy.toast.open({
+                                    message: 'Horrayy! 🎊',
+                                    type: 'is-success'
+                                })
+                            }
+                        })
+                    }
+                }
             })
         }
     }
