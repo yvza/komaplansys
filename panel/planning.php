@@ -142,12 +142,6 @@ if(@$_GET['keluar'] === 'y'){
                             </div>
                         </b-table-column>
 
-                        <b-table-column field="description" label="RATING" sortable>
-                            <b-rate 
-                                v-model="props.row.DESCRIPTION" 
-                                @change="starsChange(props.row.KUNCI, $event)"></b-rate>
-                        </b-table-column>
-
                         <b-table-column field="status" label="STATUS" sortable>
                             <div class="select">
                                 <select @change="statusChanged(props.row.KUNCI)" id="status" name="status">
@@ -170,34 +164,6 @@ if(@$_GET['keluar'] === 'y'){
                     <div class="column has-text-centered">BELUM ADA AGENDA 😭</div>
                 </div>
             </section>
-            <!-- <b-modal :active.sync="isCardModalActive" scroll="keep">
-                <div class="modal-card" style="width:auto; height: 650px;">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">Masukkan Agenda Baru</p>
-                    </header>
-                    <section class="modal-card-body">
-                        <b-field label="Acara">
-                            <b-input
-                                id="desc"
-                                type="text"
-                                placeholder="Deskripsi"
-                                required>
-                            </b-input>
-                        </b-field>
-
-                        <b-field label="Pilih rentang tanggal">
-                            <b-datepicker
-                                placeholder="Klik untuk memilih..."
-                                v-model="dates"
-                                range>
-                            </b-datepicker>
-                        </b-field>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button @click="buat()" class="button is-primary">Simpan</button>
-                    </footer>
-                </div>
-            </b-modal> -->
         </div>
         <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="false"></b-loading>
 
