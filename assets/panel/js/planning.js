@@ -196,27 +196,36 @@ const x = {
             }
         },
         hapus(event){
-            $.ajax({
-                type: "POST",
-                url: "../assets/panel/sys/planning.php?action=delete",
-                data: "id="+event,
-                success: function(res){
-                    if (res === "ok") {
-                        $.ajax({
-                            type: "GET",
-                            url: "../assets/panel/sys/planning.php?get=schedule",
-                            success: function(res){
-                                let json = JSON.parse(res)
-                                app.data = json[0]
-                                app.categories = json[1]
-                                app.status = json[2]
-                                app.$buefy.toast.open({
-                                    message: 'Deleted 👊😎',
-                                    type: 'is-success'
+            this.$buefy.dialog.confirm({
+                title: 'Menghapus agenda',
+                message: 'Yakin akan men-<b>delete</b> agenda? Tindakan ini tidak dapat dibatalkan.',
+                confirmText: 'Tetap hapus',
+                type: 'is-danger',
+                hasIcon: true,
+                onConfirm: () => {
+                    $.ajax({
+                        type: "POST",
+                        url: "../assets/panel/sys/planning.php?action=delete",
+                        data: "id="+event,
+                        success: function(res){
+                            if (res === "ok") {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "../assets/panel/sys/planning.php?get=schedule",
+                                    success: function(res){
+                                        let json = JSON.parse(res)
+                                        app.data = json[0]
+                                        app.categories = json[1]
+                                        app.status = json[2]
+                                        app.$buefy.toast.open({
+                                            message: 'Deleted 👊😎',
+                                            type: 'is-success'
+                                        })
+                                    }
                                 })
                             }
-                        })
-                    }
+                        }
+                    })
                 }
             })
         },
