@@ -144,7 +144,10 @@ if(@$_GET['keluar'] === 'y'){
 
                         <b-table-column field="status" label="STATUS" sortable>
                             <div class="select">
-                                <select @change="statusChanged(props.row.KUNCI)" id="status" name="status">
+                                <select v-if="props.row.SUID == 2" @change="statusChanged(props.row.KUNCI)" id="status" name="status" disabled>
+                                    <option v-for="st in status" :value="st.ID" :selected="st.ID == props.row.SUID">{{st.STATUS}}</option>
+                                </select>
+                                <select v-else @change="statusChanged(props.row.KUNCI)" id="status" name="status">
                                     <option v-for="st in status" :value="st.ID" :selected="st.ID == props.row.SUID">{{st.STATUS}}</option>
                                 </select>
                             </div>
