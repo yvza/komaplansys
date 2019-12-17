@@ -104,6 +104,7 @@ if(@$_GET['keluar'] === 'y'){
                 </div>
 
                 <b-table
+                    v-if="data.length != 0"
                     v-show="!isSwitched"
                     :data="data"
                     :paginated="isPaginated"
@@ -162,6 +163,12 @@ if(@$_GET['keluar'] === 'y'){
                         </b-table-column>
                     </template>
                 </b-table>
+
+                <div v-else
+                    class="columns"
+                    v-show="!isSwitched">
+                    <div class="column has-text-centered">BELUM ADA AGENDA 😭</div>
+                </div>
             </section>
             <!-- <b-modal :active.sync="isCardModalActive" scroll="keep">
                 <div class="modal-card" style="width:auto; height: 650px;">
