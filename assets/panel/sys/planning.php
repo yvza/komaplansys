@@ -6,17 +6,19 @@ if(!isset($_SESSION['members_id'])){
 }
 
 if(@$_GET['create'] === "event"){
-    $queryInsert = "INSERT INTO plansys (id, user_id, title, start_date, end_date, category, review, status) 
-    VALUES (AI_PLANSYS.nextval, ?, ?, ?, ?, ?, ?, ?)";
+    $queryInsert = "INSERT INTO plansys (id, user_id, title, start_date, end_date, category, review, status, color, note)
+    VALUES (AI_PLANSYS.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $ekseQueryInsert = $pdo->prepare($queryInsert);
     $res = $ekseQueryInsert->execute([
         $_SESSION['members_id'],
         $_POST['desc'],
         $_POST['startDate'],
         $_POST['endDate'],
-        1, //uncategorized
-        6, //unrated
-        1 //dalam pengerjaan
+        1, // uncategorized
+        1, // in progress
+        1, // dalam pengerjaan
+        $_POST['color'],
+        $_POST['note']
     ]);
     if($res){
         echo "ok";
