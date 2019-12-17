@@ -86,7 +86,7 @@ const x = {
             isLoading: false,
             isFullPage: true,
             // viewMode
-            isCardModalActive: false,
+            isCardModalNoteActive: false,
             dataNote: null
         }
     },
@@ -304,7 +304,7 @@ const x = {
                 success: function(res){
                     let json = JSON.parse(res)
                     app.dataNote = json
-                    app.isCardModalActive = true
+                    app.isCardModalNoteActive = true
                 }
             })
         }

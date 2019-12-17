@@ -169,7 +169,7 @@ if(@$_GET['keluar'] === 'y'){
             </section>
         </div>
 
-        <b-modal :active.sync="isCardModalActive" :width="640" scroll="keep">
+        <b-modal :active.sync="isCardModalNoteActive" :width="640" scroll="keep">
             <div class="card">
                 <div class="card-content">
                     <div class="content" v-html="dataNote"></div>
