@@ -22,7 +22,7 @@ body {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    background: #2196F3;
+    background: #005aaa;
 }
 
 .form-collection {
@@ -38,7 +38,7 @@ body {
     bottom: 0;
     left: 0;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     text-align: center;
     font-family: "Roboto", sans-serif;
     font-size: 27.2px;
@@ -50,7 +50,7 @@ body {
 }
 
 .form-collection {
-    z-index: 2;
+    z-index: 3;
 }
 
 /*Styling Card */
@@ -154,11 +154,11 @@ body {
 
 /*Animation Classes And Prerequisits */
 .above {
-    z-index: 1;
+    z-index: 2;
 }
 
 .below {
-    z-index: 0;
+    z-index: 1;
 }
 
 .turned {
@@ -284,4 +284,128 @@ body {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     opacity: 0.7;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+}
+
+.wrapper {
+    position: fixed; 
+    bottom: 0px;
+    right: 0px;
+    margin-right: -26px;
+    margin-bottom: 20px;
+    width: 700px;
+    height: 500px;
+}
+.animation {
+    width: 800px;
+    margin: 0 auto;
+}
+.back-frame {
+    background: url(http://funkyimg.com/i/2yp2N.png) no-repeat center center;
+}
+
+.ballon {
+    height: 500px;
+    background: url(http://funkyimg.com/i/2yp2G.png) no-repeat 400px 250px;
+    transform-origin: top center;
+    
+    animation: 
+    ballon-up 6s cubic-bezier(.49, 0, .53, 1) infinite alternate,
+    ballon-swing 6s cubic-bezier(.49, 0, .53, 1) infinite alternate;
+    -moz-animation: 
+    ballon-up 6s cubic-bezier(.49, 0, .53, 1) infinite alternate,
+    ballon-swing 6s cubic-bezier(.49, 0, .53, 1) infinite alternate;
+    -ms-animation:
+    ballon-up 6s cubic-bezier(.49, 0, .53, 1) infinite alternate,
+    ballon-swing 6s cubic-bezier(.49, 0, .53, 1) infinite alternate;  
+    -webkit-animation: 
+    ballon-up 6s cubic-bezier(.49, 0, .53, 1) infinite alternate,
+    ballon-swing 6s cubic-bezier(.49, 0, .53, 1) infinite alternate;
+    -o-animation: 
+    ballon-up 6s cubic-bezier(.83, 1.15, .9, .24) infinite alternate,
+    ballon-swing 6s cubic-bezier(.49, 0, .53, 1) infinite alternate;
+    
+    animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    -ms-animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+    -o-animation-delay: 1s;
+}
+
+@keyframes ballon-up {
+    from { background-position: 400px 250px, 0 0; }
+    to { background-position: 400px 50px, 0 0; }
+}
+
+@keyframes ballon-swing {
+    25% { transform: translate(-2px, 4px) 
+                    rotate(6deg) }
+    100% { transform: translate(0, -5px) 
+                    rotate(3deg) }
+}
+
+.cloud-1 {
+    background: url('../core/img/2yp2J.png') no-repeat 220px 190px;
+    animation: cloud-1 6s cubic-bezier(.13,.16,.17,.8) infinite alternate;
+    animation-delay: 3s;
+}
+.cloud-2 {
+    background: url('../core/img/2yp2K.png') no-repeat 480px 175px;
+    animation: cloud-2 6s cubic-bezier(.13,.16,.17,.8) infinite alternate;
+    animation-delay: 3s;
+}
+.cloud-3 {
+    background: url('../core/img/2yp2L.png') no-repeat 370px 50px;
+    animation: cloud-3 6s cubic-bezier(.13,.16,.17,.8) infinite alternate;
+    animation-delay: 3s;
+}
+
+@keyframes cloud-1 {
+    from { background-position: 220px 190px, 0 0; }
+    to { background-position: 180px 190px, 0 0; }
+}
+@keyframes cloud-2 {
+    from { background-position: 480px 175px, 0 0; }
+    to { background-position: 550px 175px, 0 0; }
+}
+@keyframes cloud-3 {
+    from { background-position: 370px 50px, 0 0; }
+    to { background-position: 270px 50px, 0 0; }
+}
+
+.train {
+    background: url('../core/img/2yp2M.png') no-repeat 500px 408px;
+    animation: train 3s linear 1s infinite;
+/*              train-out 2s linear 4s infinite; */
+}
+@keyframes train {
+    from { background-position: 500px 408px, 0 0; }
+    to { background-position: -1500px 408px, 0 0; }
+}
+@keyframes train-out {
+    from { background-position: 700px 408px, 0 0; }
+    to { background-position: 500px 408px, 0 0; }
+}
+
+.car {
+    background: url('../core/img/2yp2H.png') no-repeat 400px 424px;
+    animation: car 3s linear 1s infinite;
+/*              car-out 2s linear 1 4s forwards; */
+}
+@keyframes car {
+    0% { background-position: 800px 424px, 0 0; }
+    100% { background-position: 50px 424px, 0 0; }
+/*   100% { background-position: 800px 424px, 0 0; } */
+}
+@keyframes car-out {
+    from { background-position: 600px 424px, 0 0; }
+    to { background-position: 350px 424px, 0 0; }
+}
+
+.left-outline-frame {
+    background: url('../core/img/2yp2P.png') no-repeat -128px 260px;
+/*  height: 750px;*/
+}
+.right-outline-frame {
+    background: url('../core/img/2yp2Q.png') no-repeat 625px 313px;
+    height: 750px;
 }
