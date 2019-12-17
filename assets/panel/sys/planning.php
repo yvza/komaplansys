@@ -55,16 +55,6 @@ if(@$_GET['action'] === "delete"){
     if($res){ echo "ok"; }
 }
 
-if(@$_GET['change'] === "stars"){
-    $query = "UPDATE plansys SET review = ? WHERE id = ?";
-    $ekse = $pdo->prepare($query);
-    $res = $ekse->execute([
-        $_POST['value'],
-        $_POST['id']
-    ]);
-    if($res){ echo "ok"; }
-}
-
 if(@$_GET['change'] === "category"){
     $query = "UPDATE plansys SET category = ? WHERE id = ?";
     $ekse = $pdo->prepare($query);
