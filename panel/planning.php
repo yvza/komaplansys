@@ -96,7 +96,7 @@ if(@$_GET['keluar'] === 'y'){
                                 <div id="editor"></div>
                             </b-field>
 
-                            <br><b-button icon-left="send-outline" class="is-info is-outlined">
+                            <br><b-button @click="buat()" icon-left="send-outline" class="is-info is-outlined">
                                 Buat Sekarang
                             </b-button>
                         </div>
