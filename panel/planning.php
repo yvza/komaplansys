@@ -155,7 +155,7 @@ if(@$_GET['keluar'] === 'y'){
 
                         <b-table-column field="action" label="ACTION" sortable>
                             <b-button @click="viewMode(props.row.KUNCI)" icon-left="magnify" class="is-success is-outlined"></b-button>
-                            <b-button icon-left="file-document-edit" class="is-dark is-outlined"></b-button>
+                            <b-button @click="editNote(props.row.KUNCI)" icon-left="file-document-edit" class="is-dark is-outlined"></b-button>
                             <b-button @click="hapus(props.row.KUNCI)" icon-left="delete-empty" class="is-danger is-outlined"></b-button>
                         </b-table-column>
                     </template>
@@ -177,7 +177,7 @@ if(@$_GET['keluar'] === 'y'){
             </div>
         </b-modal>
 
-        <b-modal :active.sync="isCardModalEditActive" :width="640" scroll="keep">
+        <b-modal :active.sync="isCardModalEditActive" scroll="keep">
             <div class="card">
                 <div class="card-content">
                     <div id="editorEdit"></div>
