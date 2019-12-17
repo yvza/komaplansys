@@ -14,7 +14,7 @@
     <div id="app">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="yu.za">
+                <a class="navbar-item" href="<?php $_SERVER['PHP_SELF']; ?>">
                     <img src="../assets/core/img/logouwu.png" width="30" height="30">
                 </a>
 
