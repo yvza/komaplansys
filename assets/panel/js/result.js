@@ -11,7 +11,6 @@ const x = {
             $(".navbar-menu").toggleClass("is-active")
         })
 
-
         $.ajax({
             type: "GET",
             url: "../assets/panel/sys/result.php",
@@ -28,11 +27,11 @@ const x = {
                     chart.legend = new am4charts.Legend();
                     chart.data = [
                     {
-                        country: "Sesuai Rencana",
+                        country: "In Progress",
                         litres: app.data[2].TOTAL
                     },
                     {
-                        country: "Puas",
+                        country: "Sesuai Rencana",
                         litres: app.data[1].TOTAL
                     },
                     {
