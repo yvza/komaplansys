@@ -93,7 +93,7 @@ if(@$_GET['keluar'] === 'y'){
                             </b-field>
 
                             <b-field label="Catatan">
-                                <div id="editor"></div>
+                                <div id="editorInput"></div>
                             </b-field>
 
                             <br><b-button @click="buat()" icon-left="send-outline" class="is-info is-outlined">
@@ -173,6 +173,17 @@ if(@$_GET['keluar'] === 'y'){
             <div class="card">
                 <div class="card-content">
                     <div class="content" v-html="dataNote"></div>
+                </div>
+            </div>
+        </b-modal>
+
+        <b-modal :active.sync="isCardModalEditActive" :width="640" scroll="keep">
+            <div class="card">
+                <div class="card-content">
+                    <div id="editorEdit"></div>
+                    <br><b-button @click="editNote()" icon-left="send-outline" class="is-info is-outlined">
+                        Simpan
+                    </b-button>
                 </div>
             </div>
         </b-modal>
