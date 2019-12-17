@@ -256,13 +256,6 @@ const x = {
                 }
             })
         },
-        starsChange(id, value){
-            $.ajax({
-                type: "POST",
-                url: "../assets/panel/sys/planning.php?change=stars",
-                data: "id="+id+"&value="+value
-            })
-        },
         categoryChanged(id){
             let category = $('#category').val()
             $.ajax({
