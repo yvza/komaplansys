@@ -60,7 +60,7 @@ const data = [
     {"id":59,"user":{"first_name":"Frank","last_name":"Porter"},"date":"2016/09/08 00:48:14","gender":"Male"},
     {"id":60,"user":{"first_name":"Christopher","last_name":"Palmer"},"date":"2016/05/24 08:58:12","gender":"Male"}
 ]
-let pickr, editor
+let pickr, editorInput, editorEdit
 const x = {
     data() {
         return {
@@ -87,7 +87,10 @@ const x = {
             isFullPage: true,
             // viewMode
             isCardModalNoteActive: false,
-            dataNote: null
+            // edit note
+            isCardModalEditActive: false,
+            dataNote: null,
+            modifiedNoteId: null
         }
     },
     created() {
@@ -145,9 +148,9 @@ const x = {
         })
         // ckeditor 5 config
         ClassicEditor
-            .create( document.querySelector( '#editor' ) )
+            .create( document.querySelector( '#editorInput' ) )
             .then( newEditor => {
-                editor = newEditor
+                editorInput = newEditor
             })
             .catch( error => {
                 console.error( error );
@@ -185,7 +188,7 @@ const x = {
                 endDate = standart(this.dates[1]),
                 desc = $('#desc').val(),
                 color = this.color,
-                note = editor.getData(),
+                note = editorInput.getData(),
                 currentDate = standart(new Date())
             if(startDate < currentDate || desc == '' || note == null){
                 app.$buefy.toast.open({
@@ -206,7 +209,7 @@ const x = {
                         if(res === 'ok'){
                             app.dates = []
                             $('#desc').val('')
-                            editor.setData('')
+                            editorInput.setData('')
                             $.ajax({
                                 type: "GET",
                                 url: "../assets/panel/sys/planning.php?get=schedule",
@@ -305,6 +308,48 @@ const x = {
                     let json = JSON.parse(res)
                     app.dataNote = json
                     app.isCardModalNoteActive = true
+                }
+            })
+        },
+        editNote(id){
+            this.modifiedNoteId = id
+            this.isLoading = true
+            this.isCardModalEditActive = true
+            $.ajax({
+                type: "POST",
+                url: "../assets/panel/sys/planning.php?get=view",
+                data: "id="+id,
+                success: function(res){
+                    ClassicEditor
+                        .create( document.querySelector( '#editorEdit' ) )
+                        .then( newEditor => {
+                            editorEdit = newEditor
+                        })
+                        .catch( error => {
+                            console.error( error );
+                    })
+                    setTimeout(function(){
+                        let json = JSON.parse(res)
+                        editorEdit.setData(json)
+                        app.isLoading = false
+                    }, 500)
+                }
+            })
+        },
+        saveNewNote(){
+            this.isLoading = true
+            $.ajax({
+                type: "POST",
+                url: "../assets/panel/sys/planning.php?update=note",
+                data: "id="+app.modifiedNoteId+"&newNote="+editorEdit.getData(),
+                success: function(res){
+                    if(res === "ok"){
+                        app.$buefy.toast.open({
+                            message: 'Berhasil diperbarui 🎆🎈',
+                            type: 'is-success'
+                        })
+                        app.isLoading = false
+                    }
                 }
             })
         }
