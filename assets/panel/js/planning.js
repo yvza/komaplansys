@@ -60,7 +60,7 @@ const data = [
     {"id":59,"user":{"first_name":"Frank","last_name":"Porter"},"date":"2016/09/08 00:48:14","gender":"Male"},
     {"id":60,"user":{"first_name":"Christopher","last_name":"Palmer"},"date":"2016/05/24 08:58:12","gender":"Male"}
 ]
-
+let pickr, editor
 const x = {
     data() {
         return {
@@ -74,13 +74,18 @@ const x = {
             currentPage: 1,
             perPage: 20,
             // config insert new event
-            isCardModalActive: false,
+            // isCardModalActive: false,
             dates: [],
+            color: null,
+            note: null,
             // dropper
             categories: null,
             status: null,
             // create data switcher
-            isSwitched: false
+            isSwitched: false,
+            // loader config
+            isLoading: false,
+            isFullPage: true
         }
     },
     created() {
@@ -102,7 +107,7 @@ const x = {
             $(".navbar-menu").toggleClass("is-active")
         })
         // color picker configuration
-        const pickr = Pickr.create({
+        pickr = Pickr.create({
             el: '.color-picker',
             theme: 'nano', // or 'monolith', or 'nano'
             swatches: [
@@ -132,9 +137,16 @@ const x = {
                 }
             }
         })
+        // pockr watcher
+        pickr.on('save', (color, instance) => {
+            this.color = pickr.getSelectedColor().toHEXA().toString()
+        })
         // ckeditor 5 config
         ClassicEditor
             .create( document.querySelector( '#editor' ) )
+            .then( newEditor => {
+                editor = newEditor
+            })
             .catch( error => {
                 console.error( error );
         })
@@ -151,17 +163,28 @@ const x = {
             })
         },
         buat(){
-            function standart(dateobject){ //date manipulation
+            this.isLoading = true
+            this.color = pickr.getSelectedColor().toHEXA().toString()
+            function standart(dateobject){ // date manipulation
                 function pad(n){return n<10 ? '0'+n : n}
                 return pad(dateobject.getFullYear())+"-"+
                 pad(dateobject.getMonth()+1)+"-"+
                 pad(dateobject.getDate())
             }
+            if(this.dates.length == 0){
+                app.$buefy.toast.open({
+                    message: 'Input tidak valid 😪',
+                    type: 'is-danger'
+                })
+                return false
+            }
             let startDate = standart(this.dates[0]),
                 endDate = standart(this.dates[1]),
                 desc = $('#desc').val(),
+                color = this.color,
+                note = editor.getData(),
                 currentDate = standart(new Date())
-            if(startDate < currentDate || desc == ''){
+            if(startDate < currentDate || desc == '' || note == null){
                 app.$buefy.toast.open({
                     message: 'Input tidak valid 😪',
                     type: 'is-danger'
@@ -171,21 +194,27 @@ const x = {
                     type: "POST",
                     data: "desc="+desc+
                     "&startDate="+startDate+
-                    "&endDate="+endDate,
+                    "&endDate="+endDate+
+                    "&color="+color+
+                    "&note="+note,
                     url: "../assets/panel/sys/planning.php?create=event",
                     success: function(res){
                         if(res === 'ok'){
+                            app.dates = []
+                            $('#desc').val('')
+                            editor.setData('')
                             $.ajax({
                                 type: "GET",
                                 url: "../assets/panel/sys/planning.php?get=schedule",
                                 success: function(res){
+                                    app.isLoading = false
                                     let json = JSON.parse(res)
                                     app.data = json[0]
                                     app.categories = json[1]
                                     app.status = json[2]
-                                    app.isCardModalActive = false
+                                    // app.isCardModalActive = false
                                     app.$buefy.toast.open({
-                                        message: 'Anjay mabar 👊😎',
+                                        message: 'Berhasil ditambahkan 🎉',
                                         type: 'is-success'
                                     })
                                 }
