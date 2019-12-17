@@ -18,31 +18,9 @@ if(isset($_SESSION['members_id'])){
     <link rel="stylesheet" href="./assets/whatreudoing/style.css">
 </head>
 <body>
-    <div class="form-collection" id="app">
-        <div class="card elevation-3 limit-width log-in-card below turned">
-            <div class="card-body">
-                <div class="pemisah">
-                    <div class="kiri">
-                        <img src="./assets/core/img/logouwu.png" alt="Kelompok Lima Planning System" style="width:100px;height:100px;">
-                    </div>
-                    <div class="kanan">
-                        <h5>Kelompok Lima Planning System</h5>
-                    </div>
-                </div>
-                <div class="input-group email">
-                    <input v-model="logEmail" type="text" placeholder="Email"/>
-                </div>
-                    <div class="input-group password">
-                        <input @keyup.enter="masuk()" v-model="logPassword" type="password" placeholder="Password"/>
-                    </div>
-                    <a @click="lupaPassword($event)" href="!#" class="box-btn">Lupa Password?</a>
-                </div>
-                <div class="card-footer">
-                    <button @click="masuk()" type="submit" class="login-btn">MASUK</button>
-                </div>
-            </div>
-
-            <div class="card elevation-2 limit-width sign-up-card above">
+    <div id="app">
+        <div class="form-collection">
+            <div class="card elevation-3 limit-width log-in-card below turned">
                 <div class="card-body">
                     <div class="pemisah">
                         <div class="kiri">
@@ -52,21 +30,67 @@ if(isset($_SESSION['members_id'])){
                             <h5>Kelompok Lima Planning System</h5>
                         </div>
                     </div>
-                    <div class="input-group fullname">
-                        <input v-model="newNamaLengkap" type="text" placeholder="Nama Lengkap"/>
-                    </div>
                     <div class="input-group email">
-                        <input v-model="newEmail" type="email" placeholder="Email"/>
+                        <input v-model="logEmail" type="text" placeholder="Email"/>
                     </div>
-                    <div class="input-group password">
-                        <input @keyup.enter="daftar()" v-model="newPassword" type="password" placeholder="Password"/>
+                        <div class="input-group password">
+                            <input @keyup.enter="masuk()" v-model="logPassword" type="password" placeholder="Password"/>
+                        </div>
+                        <a @click="lupaPassword($event)" href="!#" class="box-btn">Lupa Password?</a>
+                    </div>
+                    <div class="card-footer">
+                        <button @click="masuk()" type="submit" class="login-btn">MASUK</button>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button @click="daftar()" type="submit" class="signup-btn">DAFTAR</button>
+
+                <div class="card elevation-2 limit-width sign-up-card above">
+                    <div class="card-body">
+                        <div class="pemisah">
+                            <div class="kiri">
+                                <img src="./assets/core/img/logouwu.png" alt="Kelompok Lima Planning System" style="width:100px;height:100px;">
+                            </div>
+                            <div class="kanan">
+                                <h5>Kelompok Lima Planning System</h5>
+                            </div>
+                        </div>
+                        <div class="input-group fullname">
+                            <input v-model="newNamaLengkap" type="text" placeholder="Nama Lengkap"/>
+                        </div>
+                        <div class="input-group email">
+                            <input v-model="newEmail" type="email" placeholder="Email"/>
+                        </div>
+                        <div class="input-group password">
+                            <input @keyup.enter="daftar()" v-model="newPassword" type="password" placeholder="Password"/>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button @click="daftar()" type="submit" class="signup-btn">DAFTAR</button>
+                    </div>
+                </div>
+                <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="animation">
+                <div class="back-frame">                              
+                    <div class="cloud-1">
+                        <div class="cloud-2">
+                            <div class="cloud-3">
+                                <div class="train">
+                                    <div class="right-outline-frame">
+                                        <div class="car">
+                                            <div class="left-outline-frame">
+                                                <div class="ballon">                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
         </div>
     </div>
     <script src="./node_modules/vue/dist/vue.min.js"></script>

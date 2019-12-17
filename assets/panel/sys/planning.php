@@ -91,4 +91,15 @@ if(@$_GET['change'] === "status"){
         if($res){ echo "ok"; }
     }
 }
+
+if(@$_GET['get'] === "view"){
+    $note = $pdo->query("SELECT note FROM plansys WHERE id = {$_POST['id']}")->fetch()['NOTE'];
+    echo json_encode($note);
+}
+
+if(@$_GET['update'] === "note"){
+    $ekse = $pdo->prepare("UPDATE plansys SET note = ? WHERE id = ?");
+    $res = $ekse->execute([$_POST['newNote'], $_POST['id']]);
+    if($res){ echo "ok"; }
+}
 ?>

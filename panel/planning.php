@@ -25,7 +25,7 @@ if(@$_GET['keluar'] === 'y'){
     <div id="app" v-cloak>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="yu.za">
+                <a class="navbar-item" href="<?php $_SERVER['PHP_SELF']; ?>">
                     <img src="../assets/core/img/logouwu.png" width="30" height="30">
                 </a>
 
@@ -93,7 +93,7 @@ if(@$_GET['keluar'] === 'y'){
                             </b-field>
 
                             <b-field label="Catatan">
-                                <div id="editor"></div>
+                                <div id="editorInput"></div>
                             </b-field>
 
                             <br><b-button @click="buat()" icon-left="send-outline" class="is-info is-outlined">
@@ -154,8 +154,8 @@ if(@$_GET['keluar'] === 'y'){
                         </b-table-column>
 
                         <b-table-column field="action" label="ACTION" sortable>
-                            <b-button icon-left="magnify" class="is-success is-outlined"></b-button>
-                            <b-button icon-left="file-document-edit" class="is-dark is-outlined"></b-button>
+                            <b-button @click="viewMode(props.row.KUNCI)" icon-left="magnify" class="is-success is-outlined"></b-button>
+                            <b-button @click="editNote(props.row.KUNCI)" icon-left="file-document-edit" class="is-dark is-outlined"></b-button>
                             <b-button @click="hapus(props.row.KUNCI)" icon-left="delete-empty" class="is-danger is-outlined"></b-button>
                         </b-table-column>
                     </template>
@@ -168,6 +168,26 @@ if(@$_GET['keluar'] === 'y'){
                 </div>
             </section>
         </div>
+
+        <b-modal :active.sync="isCardModalNoteActive" :width="640" scroll="keep">
+            <div class="card">
+                <div class="card-content">
+                    <div class="content" v-html="dataNote"></div>
+                </div>
+            </div>
+        </b-modal>
+
+        <b-modal :active.sync="isCardModalEditActive" scroll="keep">
+            <div class="card">
+                <div class="card-content">
+                    <div id="editorEdit"></div>
+                    <br><b-button @click="saveNewNote()" icon-left="send-outline" class="is-info is-outlined">
+                        Simpan
+                    </b-button>
+                </div>
+            </div>
+        </b-modal>
+
         <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="false"></b-loading>
 
         <footer>
