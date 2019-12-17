@@ -74,7 +74,6 @@ const x = {
             currentPage: 1,
             perPage: 20,
             // config insert new event
-            // isCardModalActive: false,
             dates: [],
             color: null,
             note: null,
@@ -212,7 +211,6 @@ const x = {
                                     app.data = json[0]
                                     app.categories = json[1]
                                     app.status = json[2]
-                                    // app.isCardModalActive = false
                                     app.$buefy.toast.open({
                                         message: 'Berhasil ditambahkan 🎉',
                                         type: 'is-success'
@@ -247,7 +245,7 @@ const x = {
                                         app.categories = json[1]
                                         app.status = json[2]
                                         app.$buefy.toast.open({
-                                            message: 'Deleted 👊😎',
+                                            message: 'Berhasil dihapus 🎇',
                                             type: 'is-success'
                                         })
                                     }
