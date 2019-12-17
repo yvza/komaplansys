@@ -181,7 +181,7 @@ if(@$_GET['keluar'] === 'y'){
             <div class="card">
                 <div class="card-content">
                     <div id="editorEdit"></div>
-                    <br><b-button @click="editNote()" icon-left="send-outline" class="is-info is-outlined">
+                    <br><b-button @click="saveNewNote()" icon-left="send-outline" class="is-info is-outlined">
                         Simpan
                     </b-button>
                 </div>
