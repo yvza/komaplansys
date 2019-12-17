@@ -27,10 +27,9 @@ if(@$_GET['create'] === "event"){
 
 if(@$_GET['get'] === "schedule"){
     $arrHelper = [];
-    $query = "SELECT ps.ID AS kunci, ps.title, ps.start_date, ps.end_date, c.id AS catid, sr.description, su.id AS suid
+    $query = "SELECT ps.ID AS kunci, ps.title, ps.start_date, ps.end_date, c.id AS catid, su.id AS suid
     FROM plansys ps
     LEFT JOIN categories c ON ps.CATEGORY = c.ID
-    LEFT JOIN stars sr ON ps.REVIEW = sr.ID
     LEFT JOIN status su ON ps.STATUS = su.ID
     WHERE user_id = {$_SESSION['members_id']} 
     ORDER BY ps.ID ASC";
@@ -66,12 +65,30 @@ if(@$_GET['change'] === "category"){
 }
 
 if(@$_GET['change'] === "status"){
-    $query = "UPDATE plansys SET status = ? WHERE id = ?";
-    $ekse = $pdo->prepare($query);
-    $res = $ekse->execute([
-        $_POST['status'],
-        $_POST['id']
-    ]);
-    if($res){ echo "ok"; }
+    $timeRightNow = date('Y-m-d');
+    $query = $pdo->prepare("SELECT end_date FROM plansys WHERE id = ?");
+    $query->execute([$_POST['id']]);
+    $endDate = $query->fetch()['END_DATE'];
+    if($timeRightNow <= $endDate){
+        // tepat waktu
+        $query = "UPDATE plansys SET status = ?, review = ? WHERE id = ?";
+        $ekse = $pdo->prepare($query);
+        $res = $ekse->execute([
+            $_POST['status'],
+            2, // sesuai rencana
+            $_POST['id']
+        ]);
+        if($res){ echo "ok"; }
+    }else{
+        // gagal
+        $query = "UPDATE plansys SET status = ?, review = ? WHERE id = ?";
+        $ekse = $pdo->prepare($query);
+        $res = $ekse->execute([
+            $_POST['status'],
+            3, // gagal
+            $_POST['id']
+        ]);
+        if($res){ echo "ok"; }
+    }
 }
 ?>
