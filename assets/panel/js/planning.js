@@ -84,7 +84,10 @@ const x = {
             isSwitched: false,
             // loader config
             isLoading: false,
-            isFullPage: true
+            isFullPage: true,
+            // viewMode
+            isCardModalActive: false,
+            dataNote: null
         }
     },
     created() {
@@ -175,6 +178,7 @@ const x = {
                     message: 'Input tidak valid 😪',
                     type: 'is-danger'
                 })
+                this.isLoading = false
                 return false
             }
             let startDate = standart(this.dates[0]),
@@ -188,6 +192,7 @@ const x = {
                     message: 'Input tidak valid 😪',
                     type: 'is-danger'
                 })
+                this.isLoading = false
             }else{
                 $.ajax({
                     type: "POST",
@@ -288,6 +293,18 @@ const x = {
                             }
                         })
                     }
+                }
+            })
+        },
+        viewMode(id){
+            $.ajax({
+                type: "POST",
+                url: "../assets/panel/sys/planning.php?get=view",
+                data: "id="+id,
+                success: function(res){
+                    let json = JSON.parse(res)
+                    app.dataNote = json
+                    app.isCardModalActive = true
                 }
             })
         }
