@@ -10,7 +10,7 @@
     "@fullcalendar/daygrid": "^4.3.0",
     "@simonwep/pickr": "^1.4.7",
     "buefy": "^0.8.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "sweetalert2": "^8.18.3",
     "vue": "^2.6.10"
   },
